@@ -29,6 +29,20 @@ const { id } = req.params; //take the ID from the URL
 res.status(200).send(quoteId);
 })
 
+
+/* This is what is given in the body.
+{
+  "quoteText": "This is a great quote",
+  "author": "Ollie"
+} */
+
+app.post("/quotes", async (req, res) => {
+  const newQuoteText = req.body.quoteText; //getting the quote text from what is given in the bodfy in postman
+  const newAuthor = req.body.author //getting the author from what is given in the body in postman.
+  const newQuote = await addQuote(newQuoteText, newAuthor); //passing the new text and new author into the function.
+  res.status(201).send(newQuote);
+});
+
 app.listen(PORT, function () {
   console.log(`Server is now listening on http://localhost:${PORT}`);
 });
